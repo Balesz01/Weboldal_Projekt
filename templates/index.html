@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MedenceBau - Főoldal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <!-- Navigáció -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">MedenceBau</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#rolunk">Rólunk</a>
+          </li>
+          <li class="nav-item dropdown">
+            <button class="btn btn-secondary dropdown-toggle nav-link" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              Galéria
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+              <li><button class="dropdown-item" type="button">Action</button></li>
+              <li><button class="dropdown-item" type="button">Another action</button></li>
+              <li><button class="dropdown-item" type="button">Something else here</button></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">Kapcsolat</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- Rólunk Carousel -->
+  <section id="rolunk" class="container mt-5 py-4">
+    <div id="aboutCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="/static/Pool1.jpg" class="d-flex w-100" alt="Minőségi Lőszerek">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Minőségi Medencék</h5>
+            <p>Csak megbízható forrásból származó alapanyagok.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="/static/Pool2.jpg" class="d-flex w-100" alt="Széles választék">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Széles választék</h5>
+            <p>Kisebb- és nagyobb medencékhez is.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="https://via.placeholder.com/800x400?text=Tapasztalt+szakértők" class="d-block w-100" alt="Tapasztalt szakértők">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Tapasztalt szakértők</h5>
+            <p>Segítünk a megfelelő medence kiválasztásában.</p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#aboutCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#aboutCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+  </section>
+
+
+  <!-- Akciós termékek -->
+  <section class="container mt-5">
+    <p class="text-center">
+      Őszi akció!!! Minden medence 100m<sup>3</sup> felett 5% kedvezményel!
+    </p>
+
+    
+        <section class="container mt-5">
+        <h2 class="text-center">Költség kalkulátor</h2>
+        <form method="POST">
+            <div class="row mb-3">
+            <div class="col-md-3">
+                <label for="anyag" class="form-label">Anyagtípus</label>
+                <select class="form-select" name="anyag" id="anyag" required>
+                <option value="beton">Beton</option>
+                <option value="muszaki_folia">Műszaki fólia</option>
+                <option value="acel">Acél</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Hossz (m)</label>
+                <input type="number" class="form-control" name="hossz" step="0.1" required>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Szélesség (m)</label>
+                <input type="number" class="form-control" name="szelesseg" step="0.1" required>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Mélység (m)</label>
+                <input type="number" class="form-control" name="melyseg" step="0.1" required>
+            </div>
+            </div>
+            <div class="mb-3">
+            <label class="form-label">További kiadások (Ft)</label>
+            <input type="number" class="form-control" name="tobbi" step="1000" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Számítás</button>
+        </form>
+
+        {% if result %}
+            <div class="mt-4 alert alert-success">
+            <p><b>Anyagköltség:</b> {{ result["anyagköltseg"] }} Ft</p>
+            <p><b>Teljes költség:</b> {{ result["teljes_koltseg"] }} Ft</p>
+            <p><b>Bevétel:</b> {{ result["bevétel"] }} Ft</p>
+            <p><b>Profit:</b> {{ result["profit"] }} Ft</p>
+            <p><b>Munkabér:</b> {{ result["munkaber"] }} Ft</p>
+            </div>
+        {% endif %}
+        </section>
+
+
+
+
+
+  <!-- Lábléc-->
+  <footer class="bg-dark text-light py-4 mt-5 w-100 px-0 mx-0">
+    <div class="container-fluid">
+      <div class="row gx-0">
+        <div class="col-md-4">
+          <h5 class="text-center text-md-start">MedenceBau</h5>
+          <p class="text-center text-md-start">Minőségi medencék, prémium anyagból,<br> profi kezekből.</p>
+        </div>
+        <div class="col-md-4">
+          <h5 class="text-center">Menü</h5>
+          <div class="row">
+            <div class="col-6 text-center">
+              <ul class="list-unstyled">
+                <li><a href="#" class="text-light">Rólunk</a></li>
+                <li><a href="#" class="text-light">Kapcsolat</a></li>
+              </ul>
+            </div>
+            <div class="col-6 text-center">
+              <ul class="list-unstyled">
+                <li><a href="#" class="text-light">Termékek</a></li>
+                <li><a href="#" class="text-light">Licenszek</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <h5 class="text-center text-md-end">Elérhetőségek</h5>
+          <p class="text-center text-md-end">
+            Email: info@MedenceBau.hu<br>
+            Telefon: +36 30 123 4567
+          </p>
+        </div>
+      </div>
+      <hr class="border-light">
+      <div class="text-center mt-3">
+        &copy; 2025 MedenceBau – Minden jog fenntartva.
+      </div>
+    </div>
+  </footer>
+  
+  
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
